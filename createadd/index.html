@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olx Clone</title>
+    <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-storage.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      var firebaseConfig = {
+        apiKey: "AIzaSyCJWLSVrJr1qW8cVRrRBeQSTd5jjG0pDNg",
+        authDomain: "olx-clone-react.firebaseapp.com",
+        databaseURL: "https://olx-clone-react.firebaseio.com",
+        projectId: "olx-clone-react",
+        storageBucket: "olx-clone-react.appspot.com",
+        messagingSenderId: "636084424751",
+        appId: "1:636084424751:web:f539387b246e190e69b6da",
+        measurementId: "G-LS0ZM3QVXN"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+    <script>
+      function openForm() {
+            document.getElementById("myForm").style.display = "block";
+            document.getElementById("formdiv").style.visibility = "hidden";
+            }
+    </script>
+    <style type="text/css">
+        .form-style-2{
+            max-width: 500px;
+            padding: 20px 12px 10px 20px;
+            font: 13px Arial, Helvetica, sans-serif;
+        }
+        .form-style-2-heading{
+            font-weight: bold;
+            font-style: italic;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 20px;
+            font-size: 15px;
+            padding-bottom: 3px;
+        }
+        .form-style-2 label{
+            display: block;
+            margin: 0px 0px 15px 0px;
+        }
+        .form-style-2 label > span{
+            width: 100px;
+            font-weight: bold;
+            float: left;
+            padding-top: 8px;
+            padding-right: 5px;
+        }
+        .form-style-2 span.required{
+            color:red;
+        }
+        .form-style-2 .tel-number-field{
+            width: 40px;
+            text-align: center;
+        }
+        .form-style-2 input.input-field, .form-style-2 .select-field{
+            width: 48%;	
+        }
+        .form-style-2 input.input-field, 
+        .form-style-2 .tel-number-field, 
+        .form-style-2 .textarea-field, 
+         .form-style-2 .select-field{
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            border: 1px solid #C2C2C2;
+            box-shadow: 1px 1px 4px #EBEBEB;
+            -moz-box-shadow: 1px 1px 4px #EBEBEB;
+            -webkit-box-shadow: 1px 1px 4px #EBEBEB;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            padding: 7px;
+            outline: none;
+        }
+        .form-style-2 .input-field:focus, 
+        .form-style-2 .tel-number-field:focus, 
+        .form-style-2 .textarea-field:focus,  
+        .form-style-2 .select-field:focus{
+            border: 1px solid #0C0;
+        }
+        .form-style-2 .textarea-field{
+            height:100px;
+            width: 48%;
+        }
+        .form-style-2 input[type=submit],
+        .form-style-2 input[type=button]{
+            border: none;
+            padding: 8px 15px 8px 15px;
+            background: #FF8500;
+            color: #fff;
+            box-shadow: 1px 1px 4px #DADADA;
+            -moz-box-shadow: 1px 1px 4px #DADADA;
+            -webkit-box-shadow: 1px 1px 4px #DADADA;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+        }
+        .form-style-2 input[type=submit]:hover,
+        .form-style-2 input[type=button]:hover{
+            background: #EA7B00;
+            color: #fff;
+        }
+
+
+/* Button used to open the contact form - fixed at the bottom of the page */
+.open-button {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  top: 150px;
+  right: 600px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: cornflowerblue;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+
+#signupForm {
+  position: fixed;
+  top: 150px;
+  right: 600px;
+  border: 3px solid #f1f1f1;
+}
+        </style>
+</head>
+<body onload="openForm()">
+    <img src="https://logodownload.org/wp-content/uploads/2016/10/olx-logo-1-1.png" alt="olxlogo" width="7%" style="position: relative;top: 15px;left: 15px;">
+    <div id="formdiv" class="form-style-2" style="align-items: center;text-align: center;">
+        <div class="form-style-2-heading">POST YOUR AD!</div>
+        <form action="" method="post">
+        <label for="field1"><span>Item Name <span class="required">*</span></span><input type="text" class="input-field" name="field1" value="" id="postname" /></label>
+        <label for="field2"><span>Item Price <span class="required">*</span></span><input type="text" class="input-field" name="field2" value="" id="postprice"/></label>
+        <label for="field2"><span>Condition <span class="required">*</span></span><select style="width: 240px;height: 20px;"><option value="old" id="condition">Old</option><option value="new">New</option></select></label>
+        <label for="field2"><span>Category <span class="required">*</span></span>
+        <select id="category">
+          <option value="Mobile Phones">Mobile Phones</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Cars">Cars</option>
+          <option value="Motorcycles">Motorcycles</option>
+          <option value="Vehicles">Vehicles</option>
+          <option value="Houses">Houses</option>
+          <option value="Animals">Animals</option>
+          <option value="Fashion and Beauty">Fashion and Beauty</option>
+          <option value="Books, Sports and Hobbies">Books, Sports and Hobbies</option>
+          <option value="Business">Business</option>
+          <option value="Agriculture">Agriculture</option>
+          <option value="Services">Services</option>
+          <option value="Furniture and Home Decour">Furniture and Home Decour</option>
+          <option value="Land and Plots">Land and Plots</option>
+        </select>
+        </label>
+        <label for="field2"><span>Picture <span class="required">*</span></span><input type="file" class="input-field" name="field2" value="" accept="image/*" id="filebutton" required></label>
+        <label for="field2"><span>Your Name <span class="required">*</span></span><input type="text" class="input-field" name="field2" value="" id="username"/></label>
+        <label for="field2"><span>Your Phone Number <span class="required">*</span></span><select style="height: 30px;" id="numbercode"><option value="92">+92</option><option value="91">+91</option><option value="1">+1</option></select><input type="number" class="input-field" name="field2" value="" id="usernumber" placeholder="Omit any zeroes, brackets or dashes"/></label>
+        <label for="field5"><span>Description <span class="required">*</span></span><textarea name="field5" class="textarea-field" id="description"></textarea></label>
+        
+        <label><span> </span><input type="button" value="Submit" style="width: 248px;" onclick="submitform()" /></label>
+        </form>
+        </div>
+
+        <div class="form-popup" id="myForm">
+            <div class="form-container">
+              <h1 style="font-family: sans-serif;">You need to login to continue</h1>
+          
+              <label><b>Email</b></label>
+              <input type="text" placeholder="Enter Email" id="emaillogin" required>
+          
+              <label><b>Password</b></label>
+              <input type="password" placeholder="Enter Password" id="passwordlogin" required>
+          
+              <button onclick="loginemail()" class="btn">Login</button>
+              <button class="btn cancel" onclick="loginfacebook()">Login With Facebook</button>
+              <button style="font-family: sans-serif;width: 300px;background-color: rgb(130, 173, 252);" onclick="signupdiv()">Don't have an account? (SignUp)</button>
+            </div>
+          </div>
+
+          <div style="visibility: hidden;" id="signupForm">
+            <div class="form-container">
+              <h1 style="font-family: sans-serif;">SignUp</h1>
+          
+              <label for="email"><b>Email</b></label>
+              <input type="text" placeholder="Enter Email" id="emailsignup" required>
+          
+              <label for="psw"><b>Password</b></label>
+              <input type="password" placeholder="Enter Password" id="passwordsignup" required>
+          
+              <button class="btn" onclick="signup()" >Signup</button>
+              <button style="font-family: sans-serif;width: 300px;background-color: rgb(130, 173, 252);" onclick="backtologin()">Back to login</button>
+            </div>
+          </div>
+
+        <script>
+
+            function submitform() {
+            var filebutton = document.getElementById("filebutton")
+            
+            var key = firebase.database().ref("userads").push().key
+            var file = document.getElementById("filebutton").files[0];
+            var storageRef = firebase.storage().ref();
+            var uploadTask = storageRef.child(key).put(file);
+
+            uploadTask.on('state_changed', function(snapshot){  //Conditions that run when file is being uploaded
+            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;  //Progress of upload (0%-100%)
+            console.log('Upload is ' + progress + '% done');
+            switch (snapshot.state) {
+            case firebase.storage.TaskState.PAUSED: // When it is paused
+            console.log('Upload is paused');
+            break;
+            case firebase.storage.TaskState.RUNNING: // When it is running
+            console.log('Upload is running');
+            break;
+            }
+            }, function(error) {  //If it fails 
+            console.log(error)
+            }, function() {    //If it uploads successfully
+            uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+            console.log('File available at', downloadURL);
+            var postad = {
+            imageURL: downloadURL,
+            postname: document.getElementById("postname").value,
+            postprice: document.getElementById("postprice").value,
+            category: document.getElementById("category").value,
+            condition: document.getElementById("condition").value,
+            username: document.getElementById("username").value,
+            usernumber: document.getElementById("numbercode").value + "" + document.getElementById("usernumber").value,
+            postdescription: document.getElementById("description").value
+            }
+            firebase.database().ref("userads" + key).set(postad);
+            setTimeout(function(){
+              location.replace("../loggedindex.html");
+            }, 2000)
+            });
+            });
+            }
+          
+
+    function signupdiv() {
+     document.getElementById("signupForm").style.visibility = "visible"
+     document.getElementById("myForm").style.visibility = "hidden";
+    }
+
+
+    function loginfacebook() {
+    var provider = new firebase.auth.FacebookAuthProvider();
+    firebase.auth().signInWithPopup(provider)
+    .then(function (result){    
+      var user = result.user
+      console.log(user)
+      document.getElementById("formdiv").style.visibility = "visible";
+      document.getElementById("myForm").style.visibility = "hidden";
+      document.getElementById("username").value = user.displayName;
+      document.getElementById("usernumber").value = user.phoneNumber;
+    }).catch(function (error){   //If it fails and gives an error
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorCode + " : " + errorMessage)
+    })
+    }
+
+    function loginemail()  {
+      var email = document.getElementById("emaillogin")
+      var password = document.getElementById("passwordlogin")
+      firebase.auth().signInWithEmailAndPassword(email.value, password.value)
+      .then(function (result){
+      console.log(result)
+      document.getElementById("formdiv").style.visibility = "visible";
+      document.getElementById("myForm").style.visibility = "hidden";
+      document.getElementById("username").value = result.user.displayName;
+    }).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorCode + " : " + errorMessage)
+});
+    }
+
+    function backtologin() {
+      location.reload()
+    }
+
+    function signup()  {
+      var email = document.getElementById("emailsignup")
+      var password = document.getElementById("passwordsignup")
+      firebase.auth().createUserWithEmailAndPassword(email.value, password.value)
+      .then(function(result){
+        setTimeout(function(){
+          location.reload();
+        }, 3000)
+      })
+      .catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorCode + " : " + errorMessage)
+});
+    }
+</script>
+</body>
+</html>
