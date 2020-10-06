@@ -153,3 +153,7 @@
     left: 200px;
   }
 }
+
+#container {
+ visibility: hidden;
+}
