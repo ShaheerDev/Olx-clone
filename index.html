@@ -34,14 +34,18 @@
   firebase.initializeApp(firebaseConfig);
 </script>
 </head>
+<div id="loadingdiv" style="position:absolute;top: 300px;left:600px;">
+  <h1 style="font-family:sans-serif;font-weight:bold">LOADING...</h1>
+</div>
 <body onload="getdata()">
+<div id="container">
     <div class="logoheader">
     <img src='./images/olxlogo.png' class="logoolx">
     <textarea rows="1" cols="100" style="position: relative;top: 15px;left: 150px;resize: none;" id="searchbar"></textarea>
     <button onclick="search_ads()" class="searchbtn">SEARCH</button>
     <a href="./createadd/index.html"><button style="position: absolute;left: 1170px;top: 15px;height: 36px;width: 250px;" class="sellButton">SELL</button></a>
 
-    <div class="topnav">
+     <div class="topnav">
       <a href="#Mobile Phones" value="Mobile Phones">Mobile Phones</a>
       <a href="#Electronics" value="Electronics">Electronics</a>
       <a href="#Cars" value="Cars">Cars</a>
@@ -55,7 +59,7 @@
       <a href="#Agriculture" value="Agriculture">Agriculture</a>
       <a href="#Services" value="Services">Services</a>
       <a href="#Furniture and Home Decour" value="Furniture and Home Decour">Furniture and Home Decour</a>
-      <a href="#Land and Plots" value="Land and Plots">Land and Plots</a>
+      <a href="Land and Plots" value="Land and Plots">Land and Plots</a>
       </div>
     </div>
       <div id="adposts">
@@ -63,6 +67,7 @@
       <ul id="adlist" style="visibility: hidden;">
         <li>emptyness</li>
       </ul>
+</div>
 <script src="app.js"></script>
 </body>
 </html>
