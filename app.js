@@ -1,5 +1,17 @@
+const loadingbar = document.getElementById("loadingdiv");
+
+setTimeout(function(){
+    if(document.readyState == "complete"){
+        document.getElementById("container").style.visibility = "visible" 
+        loadingbar.style.display = "none"
+    }else{
+        alert("Internet is too slow")
+    }  
+}, 5000);
+
 function getdata(){
     firebase.database().ref().on("child_added", function(snapshot){
+        //Get all info of ad
         const snap = snapshot.val()
         const postname = snap.postname
         const postprice = "Rs." + snap.postprice
@@ -13,6 +25,7 @@ function getdata(){
         const identify = postname + postprice + username + usernumber + description + condition + category + imageURL 
         const allinfo = document.createElement("li")
         allinfo.innerHTML = identify
+        //create elements
         var div = document.createElement("div")
         var img = document.createElement("img")
         var sdiv = document.createElement("div")
