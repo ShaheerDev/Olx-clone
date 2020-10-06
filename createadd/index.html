@@ -11,7 +11,6 @@
     <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-storage.js"></script>
-
     <script>
       // Your web app's Firebase configuration
       // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -190,9 +189,17 @@
   right: 600px;
   border: 3px solid #f1f1f1;
 }
+
+#container {
+ visibility: hidden;
+}
         </style>
 </head>
+<div id="loadingdiv" style="position:absolute;top: 300px;left:600px;">
+  <h1 style="font-family:sans-serif;font-weight:bold">LOADING...</h1>
+</div>
 <body onload="openForm()">
+  <div id="container">
     <img src="https://logodownload.org/wp-content/uploads/2016/10/olx-logo-1-1.png" alt="olxlogo" width="7%" style="position: relative;top: 15px;left: 15px;">
     <div id="formdiv" class="form-style-2" style="align-items: center;text-align: center;">
         <div class="form-style-2-heading">POST YOUR AD!</div>
@@ -257,6 +264,7 @@
               <button style="font-family: sans-serif;width: 300px;background-color: rgb(130, 173, 252);" onclick="backtologin()">Back to login</button>
             </div>
           </div>
+        </div>
 
         <script>
 
@@ -364,5 +372,6 @@
 });
     }
 </script>
+<script src="../app.js"></script>
 </body>
 </html>
