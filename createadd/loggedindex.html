@@ -180,6 +180,10 @@
   opacity: 1;
 }
 
+#container {
+ visibility: hidden;
+}
+
 #signupForm {
   position: fixed;
   top: 150px;
@@ -188,7 +192,11 @@
 }
         </style>
 </head>
+<div id="loadingdiv" style="position:absolute;top: 300px;left:600px;">
+  <h1 style="font-family:sans-serif;font-weight:bold">LOADING...</h1>
+</div>
 <body>
+  <div id="container">
     <img src="../images/olxlogo.png" alt="olxlogo" width="7%" style="position: relative;top: 15px;left: 15px;">
     <div id="formdiv" class="form-style-2" style="align-items: center;text-align: center;">
         <div class="form-style-2-heading">POST YOUR AD!</div>
@@ -222,6 +230,7 @@
         <label><span> </span><input type="button" value="Submit" style="width: 248px;" onclick="submitform()" /></label>
         </form>
         </div>
+      </div>
 
 
         <script>
@@ -267,8 +276,7 @@
             });
             });
             }
-
-
 </script>
+<script src="../app.js"></script>
 </body>
 </html>
