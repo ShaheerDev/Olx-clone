@@ -42,7 +42,7 @@ function getdata(){
         img.setAttribute("width", "128")
         img.setAttribute("height", "230")
         h5.innerHTML = postname
-        p.innerHTML = description
+        p.innerHTML = description + " (" + condition + ")"
         h2.innerHTML = postprice
         h6.innerHTML = "By: " + username
         h62.innerHTML = "By: " + username
