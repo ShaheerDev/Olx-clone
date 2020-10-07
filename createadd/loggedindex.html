@@ -203,7 +203,7 @@
         <form action="" method="post">
         <label for="field1"><span>Item Name <span class="required">*</span></span><input type="text" class="input-field" name="field1" value="" id="postname" /></label>
         <label for="field2"><span>Item Price <span class="required">*</span></span><input type="text" class="input-field" name="field2" value="" id="postprice"/></label>
-        <label for="field2"><span>Condition <span class="required">*</span></span><select style="width: 240px;height: 20px;"><option value="old" id="condition">Old</option><option value="new">New</option></select></label>
+        <label for="field2"><span>Condition <span class="required">*</span></span><select style="width: 240px;height: 20px;"  id="condition"><option value="Old">Old</option><option value="New">New</option></select></label>
         <label for="field2"><span>Category <span class="required">*</span></span>
         <select id="category">
           <option value="Mobile Phones">Mobile Phones</option>
@@ -222,6 +222,7 @@
           <option value="Land and Plots">Land and Plots</option>
         </select>
         </label>
+        <progress id="fileprogress" max="100" style="width: 130px;"> </progress>
         <label for="field2"><span>Picture <span class="required">*</span></span><input type="file" class="input-field" name="field2" value="" accept="image/*" id="filebutton" required></label>
         <label for="field2"><span>Your Name <span class="required">*</span></span><input type="text" class="input-field" name="field2" value="" id="username"/></label>
         <label for="field2"><span>Your Phone Number <span class="required">*</span></span><select style="height: 30px;" id="numbercode"><option value="92">+92</option><option value="91">+91</option><option value="1">+1</option></select><input type="number" class="input-field" name="field2" value="" id="usernumber" placeholder="Omit any zeroes, brackets or dashes"/></label>
@@ -245,7 +246,8 @@
 
             uploadTask.on('state_changed', function(snapshot){  //Conditions that run when file is being uploaded
             var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;  //Progress of upload (0%-100%)
-            console.log('Upload is ' + progress + '% done');
+            //console.log('Upload is ' + progress + '% done');
+            document.getElementById("fileprogress").value = progress
             switch (snapshot.state) {
             case firebase.storage.TaskState.PAUSED: // When it is paused
             console.log('Upload is paused');
